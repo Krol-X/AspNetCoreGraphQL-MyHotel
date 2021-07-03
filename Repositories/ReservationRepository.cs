@@ -25,11 +25,12 @@ namespace MyHotel.Repositories
 
         public async Task<IEnumerable<Reservation>> GetAll()
         {
-            return await _myHotelDbContext
+            return await (new List<Reservation>().AsQueryable()).ToListAsync();
+            /* return await _myHotelDbContext
                 .Reservations
                 .Include(x => x.Room)
                 .Include(x => x.Guest)
-                .ToListAsync();
+                .ToListAsync(); */
         }
 
         public Reservation Get(int id)
@@ -39,10 +40,12 @@ namespace MyHotel.Repositories
 
         public IIncludableQueryable<Reservation, Guest> GetQuery()
         {
-            return _myHotelDbContext
+            return new List<Reservation>().AsQueryable().Include(x => x.Room)
+                 .Include(x => x.Guest);
+            /* return _myHotelDbContext
                  .Reservations
                  .Include(x => x.Room)
-                 .Include(x => x.Guest);
+                 .Include(x => x.Guest); */
         }
     }
 }

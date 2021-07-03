@@ -41,10 +41,10 @@ namespace MyHotel
             //***</ My services >*** 
 
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+            //services.AddSpaStaticFiles(configuration =>
+            //{
+            //    configuration.RootPath = "ClientApp/dist";
+            //});
 
             services.AddDbContext<MyHotelDbContext>(options => options.UseSqlServer(MyHotelDbContext.DbConnectionString));
 
@@ -82,7 +82,7 @@ namespace MyHotel
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            // app.UseSpaStaticFiles();
 
             app.UseGraphQL<MyHotelSchema>();
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions()); //to explorer API navigate https://*DOMAIN*/ui/playground
@@ -94,15 +94,15 @@ namespace MyHotel
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
+            //app.UseSpa(spa =>
+            //{
+            //    spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseAngularCliServer(npmScript: "start");
+            //    }
+            //});
 
             InitializeMapper();
         }
